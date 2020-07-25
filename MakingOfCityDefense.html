@@ -31,7 +31,7 @@
             </ul>
             <h2>Intro</h2>
             <p>
-                CityDefense is a hyper-casual game, its mechanics are simple to understand and use and the game is self explanitory.<br>
+                CityDefense is a hyper-casual game. Its mechanics are easy to understand and use. The game is self explanatory.<br>
                 Waves of attacks threaten your city and your job is to defend it by slashing at the bombs.
                 </br>
                 </br>
@@ -75,12 +75,12 @@
             
             <h2>Popups</h2>
             <p>
-                I've implemented a basic PopupsManager that holds a reference to a Popups Canvas that contains in it the common background of a popup and all the popups disabled.
-                </br>From anywhere in the game we can call to show any popup and the PopupsManager will show it - enable it or if another popup is currently showing it'll be add to a queue.
+                I've implemented a basic PopupsManager that holds a reference to a Popups Canvas. It contains the common background of a popup and all the popups are disabled.
+                </br>Popups can show from anywhere in the game by the PopupsManager - enable it or if another popup is currently showing, added to a queue.
                 </br>When showing a popup, we can tell the PopupsManager if it has an auto-closing timeout.
-                </br>Once a popup is closed - if by actively closing it or by the auto-close, the PopupsManager checks if to disable the popup's common background or show the next popup.
+                </br>Once a popup is closed - if by actively closing it or by the auto-close, the PopupsManager checks whether to disable the popup's common background or show the next popup.
                 </br>
-                Since the game doesn't have many popups and we don't need to change them dynamiclly, we can afford to hold them all under the Popups Canvas.
+                Since the game doesn't have many popups and don't need to be changed dynamiclly, we can afford to hold them all under the Popups Canvas.
                 </br> In more complicated games we'd also be loading/unloading the popups and managing the preloader in between. 
                 </br>
                 </br>
@@ -89,10 +89,10 @@
 
             <h2>Events and decoupling</h2>
             <p>
-                Creating code that is scalable and clear to understand, were every area of code is responsible only for itself and doesn't control others is a hard task.
-                It demands planing the code structure ahead of time and not just "making it work" on the fly.
+                Creating code that is scalable and clear to understand, where every area of code is responsible only for itself and doesn't control others is a hard task.
+                It demands planning the code structure ahead of time and not just "making it work" on the fly.
                 </br> To follow this basic code philosophy I've used an EventManager to pass events and data between areas of code.
-                </br> Anyone who cares for a certain event will listen to it and handle it according to a pre-defined protocol structure of the event's data.
+                </br> Anyone who cares for a certain event will listen to it and handle it according to a predefined protocol structure of the event's data.
                 </br>
                 </br>For example:
                 </br>Blade hits a bomb -> Triggers a hit event -> Bomb handles the event and creates a sliced animation. -> Triggers an award event -> GameManager updates the user's score.
