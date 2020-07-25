@@ -26,7 +26,9 @@
         <!-- Main -->
         <div id="main">
             <h1 style="text-align:center">Making Of City Defense</h1>
-            
+            <ul class="actions special">
+                <li><a href="https://github.com/Meirshomron/CityDefense" target="_blank" class="button">View Code</a></li>
+            </ul>
             <h2>Intro</h2>
             <p>
                 CityDefense is a hyper-casual game, its mechanics are simple to understand and use and the game is self explanitory.<br>
@@ -87,10 +89,10 @@
 
             <h2>Events and decoupling</h2>
             <p>
-                Creating code that is scalable and clear, where every area of code is responsible only for itself and doesn't control others is a hard task.
-                It demands planing the code strucutre ahead of time and not just "making it work" on the fly.
+                Creating code that is scalable and clear to understand, were every area of code is responsible only for itself and doesn't control others is a hard task.
+                It demands planing the code structure ahead of time and not just "making it work" on the fly.
                 </br> To follow this basic code philosophy I've used an EventManager to pass events and data between areas of code.
-                </br> Anyone who cares for a certain event will listen to it and handle it according to a pre-defined protocol strucutre of the event's data.
+                </br> Anyone who cares for a certain event will listen to it and handle it according to a pre-defined protocol structure of the event's data.
                 </br>
                 </br>For example:
                 </br>Blade hits a bomb -> Triggers a hit event -> Bomb handles the event and creates a sliced animation. -> Triggers an award event -> GameManager updates the user's score.
