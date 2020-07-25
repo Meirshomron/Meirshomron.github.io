@@ -71,9 +71,10 @@
             
             <h2>Popups</h2>
             <p>
-                Development challenges and code structure of CityDefense. CityDefense is A unity game based on the fruit ninja and tower defense. 
-                </br>
-                </br>
+                I've implemented a basic PopupsManager that holds a refernce to a Popup canvas that contains in it the common background of a popup and all the popups disabled.
+                </br>From anywhere in the game we can call to show any popup and the PopupsManager will show it - enable it or if another popup is currently showing it'll be add to a queue.
+                </br>When showing a popup, we can tell the PopupsManager if it has a auto-closing timeout.
+                </br>Once a popup is closed - if by activiliy closing it or by the auto-close, the PopupsManager checks if to disable the popup's common background or show the next popup.
                 </br>
             </p>
 
