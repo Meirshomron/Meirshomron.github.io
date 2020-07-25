@@ -59,9 +59,12 @@
             
             <h2>Pooling</h2>
             <p>
-                Development challenges and code structure of CityDefense. CityDefense is A unity game based on the fruit ninja and tower defense. 
-                </br>
-                </br>
+                In our game we are spawning bombs and boosters every wave, all the time.
+                </br>We improve performance and memory use by reusing objects from a fixed pool instead of allocating and freeing them individually.
+                </br>When the game starts, we insert into our pool several objects per type and we use and re-use them.
+                You can play the game for hours and still be using only 6 bombs and 6 boosters total!
+                In Addition to the standard implementation of pooling, I've add the ability to use an object from the pool for a limited amount of time and to return all the objectof of a type at once.
+                </br><a class="image"><img src="images/CityDefense10.png" height="900" alt="" /></a>
                 </br>
             </p>
             
