@@ -73,11 +73,13 @@
             
             <h2>Popups</h2>
             <p>
-                I've implemented a basic PopupsManager that holds a refernce to a Popup canvas that contains in it the common background of a popup and all the popups disabled.
+                I've implemented a basic PopupsManager that holds a reference to a Popups Canvas that contains in it the common background of a popup and all the popups disabled.
                 </br>From anywhere in the game we can call to show any popup and the PopupsManager will show it - enable it or if another popup is currently showing it'll be add to a queue.
-                </br>When showing a popup, we can tell the PopupsManager if it has a auto-closing timeout.
-                </br>Once a popup is closed - if by activiliy closing it or by the auto-close, the PopupsManager checks if to disable the popup's common background or show the next popup.
+                </br>When showing a popup, we can tell the PopupsManager if it has an auto-closing timeout.
+                </br>Once a popup is closed - if by actively closing it or by the auto-close, the PopupsManager checks if to disable the popup's common background or show the next popup.
                 </br>
+                Since the game doesn't have many popups and we don't need to change them dynamiclly, we can afford to hold them all under the Popups Canvas.
+                </br> In more complicated games we'll also be loading/unloading the popups and managing the preloader in between. 
                 </br>
                 </br>
             </p>
