@@ -79,13 +79,23 @@
                 </br>Once a popup is closed - if by actively closing it or by the auto-close, the PopupsManager checks if to disable the popup's common background or show the next popup.
                 </br>
                 Since the game doesn't have many popups and we don't need to change them dynamiclly, we can afford to hold them all under the Popups Canvas.
-                </br> In more complicated games we'll also be loading/unloading the popups and managing the preloader in between. 
+                </br> In more complicated games we'd also be loading/unloading the popups and managing the preloader in between. 
+                </br>
                 </br>
                 </br>
             </p>
 
-            <h2>Events and coupling</h2>
-            <p>Development challenges and code structure of CityDefense. CityDefense is A unity game based on the fruit ninja and tower defense. </p>
+            <h2>Events and decoupling</h2>
+            <p>
+                Creating code that is scalable and clear, where every area of code is responsible only for itself and doesn't control others is a hard task.
+                It demands planing the code strucutre ahead of time and not just "making it work" on the fly.
+                </br> To follow this basic code philosophy I've used an EventManager to pass events and data between areas of code.
+                </br> Anyone who cares for a certain event will listen to it and handle it according to a pre-defined protocol strucutre of the event's data.
+                </br>
+                </br>For example:
+                </br>Blade hits a bomb -> Triggers a hit event -> Bomb handles the event and creates a sliced animation. -> Triggers an award event -> GameManager updates the user's score.
+                
+            </p>
 
             <!-- Footer -->
             <footer>
