@@ -1,0 +1,145 @@
+﻿<!DOCTYPE HTML>
+<!--
+    Massively by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Meir Shomron</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul class="icons">
+                <li><a href="https://www.facebook.com/meir.shomron" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                <li><a href="https://instagram.com/meirshomron" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="https://github.com/Meirshomron" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+            </ul>
+        </nav>
+
+        <!-- Main -->
+        <div id="main">
+            <h1 style="text-align:center">Making Of Chess</h1>
+            <ul class="actions special">
+                <li><a href="https://github.com/Meirshomron/Chess" target="_blank" class="button">View Code</a></li>
+            </ul>
+            <h2>Intro</h2>
+            <p>
+                CityDefense is a hyper-casual game. Its mechanics are easy to understand and use. The game is self explanatory.<br>
+                Waves of attacks threaten your city and your job is to defend it by slashing at the bombs.
+                </br>
+                </br>
+                </br>
+            </p>               
+            
+            <h2>structure</h2>
+            <p>
+                <a class="image"><img src="images/CityDefense9.png" height="900" alt="" /></a>
+                 
+                </br>
+                </br>
+                </br>
+            </p>  
+            
+            <h2>Waves logic</h2>
+            <p>
+                The GameManager manages the WavesManager and the WavesManager manages as is expected - the waves.<br>
+                Every wave has its own level of difficulty that influences both the BombSpawner and the BoostersSpawner.<br>
+                Both these spawners are updated and managed by the WavesManager.<br>
+                The WavesManager also manages the countdown time of the current wave and holds the logic to determine the difficulty of the next wave.<br>
+                <a class="image"><img src="images/CityDefense8.png" height="900" alt="" /></a>
+                </br>
+                </br>
+                </br>
+            </p>
+            
+            <h2>Pooling</h2>
+            <p>
+                In our game we are spawning bombs and boosters every wave, all the time.
+                </br>We improve performance and memory use by reusing objects from a fixed pool instead of allocating and freeing them individually.
+                </br>When the game starts, we insert into our pool several objects per type and we use and re-use them.
+                You can play the game for hours and still be using only 6 bombs and 6 boosters total!
+                </br>In addition to the standard implementation of pooling, I've added the ability to use an object from the pool for a limited amount of time and to return all the objects of a certain type at once.
+                </br></br>This image shows the pool at the start of the game in the game hierarchy:
+                </br><a class="image"><img src="images/CityDefense10.png" height="500" alt="" /></a>
+                </br>
+                </br>
+                </br>
+            </p>
+            
+            <h2>Popups</h2>
+            <p>
+                I've implemented a basic PopupsManager that holds a reference to a Popups Canvas. It contains the common background of a popup and all the popups are disabled.
+                </br>Popups can show from anywhere in the game by the PopupsManager - enable it or if another popup is currently showing, added to a queue.
+                </br>When showing a popup, we can tell the PopupsManager if it has an auto-closing timeout.
+                </br>Once a popup is closed - if by actively closing it or by the auto-close, the PopupsManager checks whether to disable the popup's common background or show the next popup.
+                </br>
+                Since the game doesn't have many popups and they don't need to be changed dynamiclly, we can afford to hold them all under the Popups Canvas.
+                </br> In more complicated games we'd also be loading/unloading the popups and managing the preloader in between. 
+                </br>
+                </br>
+                </br>
+            </p>
+
+            <h2>Events and decoupling</h2>
+            <p>
+                Creating code that is scalable and clear to understand, where every area of code is responsible only for itself and doesn't control others is a hard task.
+                It demands planning the code structure ahead of time and not just "making it work" on the fly.
+                </br> To follow this basic code philosophy I've used an EventManager to pass events and data between areas of code.
+                </br> Anyone who cares for a certain event will listen to it and handle it according to a predefined protocol structure of the event's data.
+                </br>
+                </br>For example:
+                </br>Blade hits a bomb -> Triggers a hit event -> Bomb handles the event and creates a sliced animation. -> Triggers an award event -> GameManager updates the user's score.
+                
+            </p>
+
+            <!-- Footer -->
+            <footer>
+                <div class="pagination">
+                    <!--<a href="#" class="previous">Prev</a>-->
+                    <a href="articles.html" class="page">Articles</a>
+                </div>
+            </footer>
+
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <section>
+                <h3>Email</h3>
+                <p>meirshomron@gmail.com</p>
+            </section>
+            <section>
+                <h3>Social</h3>
+                <ul class="icons alt">
+                    <li><a href="https://www.facebook.com/meir.shomron" target="_blank" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+                    <li><a href="https://instagram.com/meirshomron" target="_blank" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="https://github.com/Meirshomron" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                </ul>
+                <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+                <div class="LI-profile-badge" data-version="v1" data-size="medium" data-locale="en_US" data-type="vertical" data-theme="light" data-vanity="meir-shomron-14580313a"><a class="LI-simple-link" href='https://il.linkedin.com/in/meir-shomron-14580313a?trk=profile-badge'>Meir Shomron</a></div>
+            </section>
+        </footer>
+
+        <!-- Copyright -->
+        <div id="copyright">
+            <ul><li>&copy; MEIRSHOMRON</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+        </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>
