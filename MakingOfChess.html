@@ -31,8 +31,8 @@
             </ul>
             <h2>Intro</h2>
             <p>
-                CityDefense is a hyper-casual game. Its mechanics are easy to understand and use. The game is self explanatory.<br>
-                Waves of attacks threaten your city and your job is to defend it by slashing at the bombs.
+                Chess is well known board game. Implementing it in Unity in a grat way to continue improving as a game developer.
+                </br>In this article I'll focus on the unique topices related to making a board game and specificly, Chess.
                 </br>
                 </br>
                 </br>
@@ -40,63 +40,44 @@
             
             <h2>structure</h2>
             <p>
-                <a class="image"><img src="images/CityDefense9.png" height="900" alt="" /></a>
+                <a class="image"><img src="images/Chess_5.png" height="900" alt="" /></a>
                  
                 </br>
                 </br>
                 </br>
             </p>  
             
-            <h2>Waves logic</h2>
+            <h2>Game loop</h2>
             <p>
-                The GameManager manages the WavesManager and the WavesManager manages as is expected - the waves.<br>
-                Every wave has its own level of difficulty that influences both the BombSpawner and the BoostersSpawner.<br>
-                Both these spawners are updated and managed by the WavesManager.<br>
-                The WavesManager also manages the countdown time of the current wave and holds the logic to determine the difficulty of the next wave.<br>
-                <a class="image"><img src="images/CityDefense8.png" height="900" alt="" /></a>
+                
                 </br>
                 </br>
                 </br>
-            </p>
-            
-            <h2>Pooling</h2>
+            </p>  
+
+
+            <h2>Board / pieces</h2>
             <p>
-                In our game we are spawning bombs and boosters every wave, all the time.
-                </br>We improve performance and memory use by reusing objects from a fixed pool instead of allocating and freeing them individually.
-                </br>When the game starts, we insert into our pool several objects per type and we use and re-use them.
-                You can play the game for hours and still be using only 6 bombs and 6 boosters total!
-                </br>In addition to the standard implementation of pooling, I've added the ability to use an object from the pool for a limited amount of time and to return all the objects of a certain type at once.
-                </br></br>This image shows the pool at the start of the game in the game hierarchy:
-                </br><a class="image"><img src="images/CityDefense10.png" height="500" alt="" /></a>
-                </br>
-                </br>
-                </br>
-            </p>
-            
-            <h2>Popups</h2>
-            <p>
-                I've implemented a basic PopupsManager that holds a reference to a Popups Canvas. It contains the common background of a popup and all the popups are disabled.
-                </br>Popups can show from anywhere in the game by the PopupsManager - enable it or if another popup is currently showing, added to a queue.
-                </br>When showing a popup, we can tell the PopupsManager if it has an auto-closing timeout.
-                </br>Once a popup is closed - if by actively closing it or by the auto-close, the PopupsManager checks whether to disable the popup's common background or show the next popup.
-                </br>
-                Since the game doesn't have many popups and they don't need to be changed dynamiclly, we can afford to hold them all under the Popups Canvas.
-                </br> In more complicated games we'd also be loading/unloading the popups and managing the preloader in between. 
+                
                 </br>
                 </br>
                 </br>
             </p>
 
-            <h2>Events and decoupling</h2>
+            <h2>Simulations</h2>
             <p>
-                Creating code that is scalable and clear to understand, where every area of code is responsible only for itself and doesn't control others is a hard task.
-                It demands planning the code structure ahead of time and not just "making it work" on the fly.
-                </br> To follow this basic code philosophy I've used an EventManager to pass events and data between areas of code.
-                </br> Anyone who cares for a certain event will listen to it and handle it according to a predefined protocol structure of the event's data.
-                </br>
-                </br>For example:
-                </br>Blade hits a bomb -> Triggers a hit event -> Bomb handles the event and creates a sliced animation. -> Triggers an award event -> GameManager updates the user's score.
                 
+                </br>
+                </br>
+                </br>
+            </p>
+            
+            <h2>Save / Load</h2>
+            <p>
+                
+                </br>
+                </br>
+                </br>
             </p>
 
             <!-- Footer -->
