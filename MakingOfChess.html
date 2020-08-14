@@ -51,12 +51,9 @@
             <p>
                 Board Games consist of several players playing together. Every player makes his moves when it's his turn.
                 The game ends when a move is made that sets the player as the winner.
-                This requires holding a <b>GameModel</b>, a data model up to date on:
-                    </br><b>1. </b>Who's turn it is.</li>
-                    </br><b>2. </b>Is the game over.</li>
-                    </br><b>3. </b>Is a move in progress.</li>
-                    </br><b>4. </b>Is a player in check / checkmate.</li>
-                    </br><b>5. </b>The currently selected piece.</li>
+                The <i>BoardController</i> is in charge of the managing the flow of the game.
+                </br>In more complicated board games, the game is subtracted to different states in a state machine and the controller handles the interactions between the states.
+                </br>Here I had no need for this encapsulation and the The <i>BoardController</i> controls the game flow with the help of the GameModel.
                 </br><a class="image"><img src="images/Chess_9.png" height="900" alt="" /></a>
                 </br>
                 </br>
@@ -81,7 +78,14 @@
                 </br><b>3. Players:</b></br>
 
                 </br><b>4. GameModel:</b></br>
-
+                In order for the <i>BoardController</i> to control the flow of the game, we need to hold up-to-play data of the game:
+                    </br><b>a. </b>Who's turn it is.</li>
+                    </br><b>b. </b>Is the game over.</li>
+                    </br><b>c. </b>Is a move in progress.</li>
+                    </br><b>d. </b>Is a player in check / checkmate.</li>
+                    </br><b>e. </b>The currently selected piece.</li>
+                The <i>GameModel<i/> Handles all this Game data and creates and contains the players data.
+                </br><a class="image"><img src="images/Chess_11.png" height="900" alt="" /></a>
                 </br><b>5. Saved Game:</b></br>
                 </br>
                 </br>
