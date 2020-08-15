@@ -74,6 +74,17 @@
                 Every tile holds the player on it - if it's not empty and color manipulation values.
                 
                 </br><b>2. Pieces:</b></br>
+                All pieces inherit from an abstract Piece class.
+                </br>The main difference between the pieces in chess is their possible moves, so each sub-class must implement its own SetMoves()
+                </br>There are 3 main ways of connecting the piece to the tile it's on:
+                    </br><b>a. </b>The tile has a pointer to the piece that's on / The piece has a pointer to the tile it's on. </li>
+                    </br><b>b. </b>We Store the tiles in an array in a way that we hold a mapping from a piece's position on the board to the tile it's on.</li>
+                    </br><b>c. </b>Every piece saves the index of the tile it's on.</li>
+                </br>I went for the third option since I didn't want to expose pointers between a piece and a tile. and the second option was more complicated then the third option.
+                </br>Every tile didn't need to know the piece on it, only if a piece was on it and the player on it.
+                </br>Clickability of a piece could've bean handled by every piece with <i>OnMouseDown()</i>, and then it could've updated the <i>BoardController</i> with the currently selected piece.
+                </br>I preferred moving all the input handling to the <i>BoardController</i>, but it could've been in an <i>InputHandler</i> class but in this case it's overkill.
+                </br>Every piece has a box collider and all the pieces are in the same layer so the <i>BoardController</i> can ray cast for this layer only on every mouse click. 
 
                 </br><b>3. Players:</b></br>
 
