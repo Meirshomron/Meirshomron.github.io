@@ -31,8 +31,8 @@
             </ul>
             <h2>Intro</h2>
             <p>
-                Chess is well known board game. Implementing it in Unity is a great way to continue improving as a game developer.
-                </br>In this article I'll focus on the unique topices related to making a board game and specifically, Chess.
+                Chess is a popular board game. Implementing it in Unity is a great way to continue improving as a game developer.
+                </br>In this article I'll focus on the unique topics related to making a board game and specifically, Chess.
                 </br>
                 </br>
                 </br>
@@ -49,7 +49,7 @@
             
             <h2>Game loop</h2>
             <p>
-                Board Games consist of several players playing together. Every player makes his moves when it's his turn.
+                Board games consist of several players playing together. Every player makes his/her move when it's his/her turn.
                 The game ends when a move is made that sets the player as the winner.
                 The <i>BoardController</i> is in charge of the managing the flow of the game.
                 </br>In more complicated board games, the game is subtracted to different states in a state machine and the controller handles the interactions between the states.
@@ -63,12 +63,12 @@
 
             <h2>Game Managment</h2>
             <p>
-                The Game consists of many resources and data that needs to be managed and interact with each other.
+                The game consists of many resources and data that need to be managed and interact with each other.
                 </br><a class="image"><img src="images/Chess_10.png" height="200" alt="" /></a>
 
                 </br></br><b>1. Tiles - Game board:</b></br>
                 The tiles can be created dynamically on game start or the game can already have them as part of it.
-                The pros and cons are mainly on the time it takes to create them vs the affect of their weight on the size of your app in the store. 
+                The pros and cons are mainly regarding the time it takes to create them vs the affect of their weight on the size of your app in the store. 
                 Since the board is always loaded and part of our game both options are good but I chose to create them dynamically because createing 64 tiles ahead of time is a lot of work.
                 The <i>TilesMap</i> is in charge of creating all the tiles and managing their data.
                 Every tile holds the player on it - if it's not empty and color manipulation values.
@@ -78,12 +78,12 @@
                 </br>The main difference between the pieces in chess is their possible moves, so each sub-class must implement its own SetMoves().
                 </br>There are 3 main ways of connecting the piece to the tile it's on:
                     </br><b>a. </b>The tile has a pointer to the piece that's on it / The piece has a pointer to the tile it's on. </li>
-                    </br><b>b. </b>We Store the tiles in an array in a way that we hold a mapping from a piece's position on the board to the tile it's on.</li>
+                    </br><b>b. </b>We store the tiles in an array in a way that we hold a mapping from a piece's position on the board to the tile it's on.</li>
                     </br><b>c. </b>Every piece saves the index of the tile it's on.</li>
                 </br>I went for the third option since I didn't want to expose pointers between a piece and a tile.
                 </br>The second option was more complicated then the third option, and I prefer holding up-to-date data then re-calculating it here.
                 </br>Every tile didn't need to know the piece on it, only if a piece was on it and the player on it.
-                </br>Clickability of a piece could've bean handled by every piece with <i>OnMouseDown()</i>, and then it could've updated the <i>BoardController</i> with the currently selected piece.
+                </br>Clickability of a piece could have been handled by every piece with <i>OnMouseDown()</i>, and then it could've updated the <i>BoardController</i> with the currently selected piece.
                 </br>I preferred moving all the input handling to the <i>BoardController</i>, but it could've been in an <i>InputHandler</i> class but in this case it was overkill.
                 </br>Every piece has a box collider and all the pieces are in the same layer so the <i>BoardController</i> can ray cast for this layer only on every mouse click. 
                 </br><a class="image"><img src="images/Chess_13.png" height="700" alt="" /></a>
@@ -91,11 +91,11 @@
                 </br></br><b>3. Players:</b></br>
                The amount of players in Chess is 2, other board games might enable choosing the number of players at the start so I can statically create my 2 players.
                 </br>Every player Holds: id, name and a pointer to all it's pieces.
-                </br>for simplicity reasons I managed the 2 palyer's data in the <i>GameModel</i>.
+                </br>For simplicity reasons I managed the 2 player's data in the <i>GameModel</i>.
 
                 </br></br><b>4. GameModel:</b></br>
                 In order for the <i>BoardController</i> to control the flow of the game, we need to hold up-to-play data of the game:
-                    </br><b>a. </b>Who's turn it is.</li>
+                    </br><b>a. </b>Whose turn it is.</li>
                     </br><b>b. </b>Is the game over.</li>
                     </br><b>c. </b>Is a move in progress.</li>
                     </br><b>d. </b>Is a player in check / checkmate.</li>
