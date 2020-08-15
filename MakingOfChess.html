@@ -120,10 +120,10 @@
             <p>
                 </br><b>Problem: </b> In Chess we need to simulate if a move will put my king in check or if my move can save the king from a current state of check.
                 </br><b>Solution 1: </b> Before we make any move simulate my moves and validate them for my king's check status.
-                </br><b>Solution 2: </b> Hold extra data on every piece, if it's potentially threatening the opposing player's king, manage all these potential threats and actual threats and validate your moves on them.
+                </br><b>Solution 2: </b> Hold extra data on every piece, if it's potentially threatening the opposing player's king, manage all these potential threats and actual threats and validate your moves vs them.
                 </br>
                 </br>Main con for solution 1 is that you need to have the moves of all your players updated on every simulation and every piece needs to be simulated before it moves and this is CPU expensive.
-                </br>Solution 2 is an attempt to reduce the calculations by validating gains the threating pieces of the opponenet and not all his pieces, since we only have 16 pieces and each with a limited amount of moves I've not attempted solution 2.
+                </br>Solution 2 is an attempt to reduce the calculations by validating against the threating pieces of the opponenet and not all his pieces, since we only have max 16 pieces that can threaten and each with a limited amount of moves I've not attempted solution 2.
             </p>
 
             <h2>References</h2>
