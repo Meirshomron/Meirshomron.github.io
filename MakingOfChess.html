@@ -66,14 +66,14 @@
                 The Game consists of many resources and data that needs to be managed and interact with each other.
                 </br><a class="image"><img src="images/Chess_10.png" height="200" alt="" /></a>
 
-                </br><b>1. Tiles - Game board:</b></br>
+                </br></br><b>1. Tiles - Game board:</b></br>
                 The tiles can be created dynamically on game start or the game can already have them as part of it.
                 The pros an cons are mainly on the time it takes to create them vs the affect of their weight on the size of your app in the store. 
                 Since the board is always loaded and part of our game both options are good but I chose to create them dynamically because createing 64 tiles ahead of time is a lot of work.
                 The <i>TilesMap</i> is in charge of creating all the tiles and managing their data.
                 Every tile holds the player on it - if it's not empty and color manipulation values.
                 
-                </br><b>2. Pieces:</b></br>
+                </br></br><b>2. Pieces:</b></br>
                 All pieces inherit from an abstract Piece class.
                 </br>The main difference between the pieces in chess is their possible moves, so each sub-class must implement its own SetMoves().
                 </br>There are 3 main ways of connecting the piece to the tile it's on:
@@ -88,9 +88,9 @@
                 </br>Every piece has a box collider and all the pieces are in the same layer so the <i>BoardController</i> can ray cast for this layer only on every mouse click. 
                 </br><a class="image"><img src="images/Chess_13.png" height="700" alt="" /></a></br>
                 
-                </br><b>3. Players:</b></br>
+                </br></br><b>3. Players:</b></br>
 
-                </br><b>4. GameModel:</b></br>
+                </br></br><b>4. GameModel:</b></br>
                 In order for the <i>BoardController</i> to control the flow of the game, we need to hold up-to-play data of the game:
                     </br><b>a. </b>Who's turn it is.</li>
                     </br><b>b. </b>Is the game over.</li>
