@@ -32,7 +32,7 @@
             <h2>Intro</h2>
             <p>
                 Chess is a popular board game. Implementing it in Unity is a great way to continue improving as a game developer.
-                </br>In this article I'll focus on the unique topics related to making a board game and specifically, Chess.
+                </br>In this article I'll focus on the unique topics related to making a board game, specifically Chess.
                 </br>
                 </br>
                 </br>
@@ -49,10 +49,10 @@
             
             <h2>Game loop</h2>
             <p>
-                Board games consist of several players playing together. Every player makes his/her move when it's his/her turn.
-                The game ends when a move is made that sets the player as the winner.
-                The <i>BoardController</i> is in charge of the managing the flow of the game.
-                </br>In more complicated board games, the game is subtracted to different states in a state machine and the controller handles the interactions between the states.
+                Board games consist of several players playing together. Each player makes their move when it's their turn.
+                The game ends when a move is made that determines the player the winner.
+                The <i>BoardController</i> is in charge of managing the flow of the game.
+                </br>In more complicated board games, the game is subtracted from different states in a state machine and the controller handles the interactions between the states.
                 </br>Here I had no need for this encapsulation and the The <i>BoardController</i> controls the game flow with the help of the GameModel.
                 </br><a class="image"><img src="images/Chess_9.png" height="900" alt="" /></a>
                 </br>
@@ -81,7 +81,7 @@
                     </br><b>b. </b>We store the tiles in an array in a way that we hold a mapping from a piece's position on the board to the tile it's on.</li>
                     </br><b>c. </b>Every piece saves the index of the tile it's on.</li>
                 </br>I went for the third option since I didn't want to expose pointers between a piece and a tile.
-                </br>The second option was more complicated then the third option, and I prefer holding up-to-date data then re-calculating it here.
+                </br>The second option was more complicated than the third option, and I prefer holding up-to-date data than re-calculating it here.
                 </br>Every tile didn't need to know the piece on it, only if a piece was on it and the player on it.
                 </br>Clickability of a piece could have been handled by every piece with <i>OnMouseDown()</i>, and then it could've updated the <i>BoardController</i> with the currently selected piece.
                 </br>I preferred moving all the input handling to the <i>BoardController</i>, but it could've been in an <i>InputHandler</i> class but in this case it was overkill.
@@ -89,9 +89,9 @@
                 </br><a class="image"><img src="images/Chess_13.png" height="700" alt="" /></a>
                 
                 </br></br><b>3. Players:</b></br>
-               The amount of players in Chess is 2, other board games might enable choosing the number of players at the start so I can statically create my 2 players.
-                </br>Every player Holds: id, name and a pointer to all it's pieces.
-                </br>For simplicity reasons I managed the 2 player's data in the <i>GameModel</i>.
+               Two players are required in Chess so I can statically create my 2 players.Note, other board games might enable choosing the number of players at the start.
+                </br>Each player has: ID, name and a pointer to all it's pieces.
+                </br>For simplicity I managed the 2 player's data in the <i>GameModel</i>.
 
                 </br></br><b>4. GameModel:</b></br>
                 In order for the <i>BoardController</i> to control the flow of the game, we need to hold up-to-play data of the game:
@@ -104,10 +104,10 @@
                 </br><a class="image"><img src="images/Chess_12.png" height="700" alt="" /></a>
                 
                 </br></br><b>5. Saved Game:</b></br>
-                Saving a game state, includes saving the all the piece's data and the current turn and loading it on demand.
+                Saving a game state, includes saving all the piece's data, the current turn and loading it on demand.
                 </br><b>5.1 Saving: </b></br>
-                We can save all this data to server or to a local file. 
-                </br>I chose to a local file since it's simpler but the better solution would be to a server so when moving between devices you don't lose your saved game and it's more secure.
+                We can save all this data to a server or to a local file. 
+                </br>I chose to a local file since it's simpler. The better solution would be to a server so that when moving between devices you don't lose your saved game. It's also more secure.
                 </br>I only supported saving the last saved game but in the same way we can save many games.
                 </br><b>5.1 Loading: </b></br>
                 We can only load a saved game from in-game. Since we only saved the pieces data and not the actual pieces, we need to update the data of the current pieces.
@@ -119,11 +119,11 @@
             <h2>Simulations</h2>
             <p>
                 </br><b>Problem: </b> In Chess we need to simulate if a move will put my king in check or if my move can save the king from a current state of check.
-                </br><b>Solution 1: </b> Before we make any move simulate my moves and validate them for my king's check status.
-                </br><b>Solution 2: </b> Hold extra data on every piece, if it's potentially threatening the opposing player's king, manage all these potential threats and actual threats and validate your moves vs them.
+                </br><b>Solution 1: </b> Before we make any moves, simulate my moves and validate them for my king's check status.
+                </br><b>Solution 2: </b> Hold extra data on every piece. If it's potentially threatening to the opposing player's king, then manage all potential and actual threats and validate your moves vs them.
                 </br>
-                </br>Main con for solution 1 is that you need to have the moves of all your players updated on every simulation and every piece needs to be simulated before it moves and this is CPU expensive.
-                </br>Solution 2 is an attempt to reduce the calculations by validating against the threating pieces of the opponenet and not all his pieces, since we only have max 16 pieces that can threaten and each with a limited amount of moves I've not attempted solution 2.
+                </br>Main con for solution 1 is that you need to have the moves of all your players updated on every simulation and every piece needs to be simulated before it moves. This is CPU expensive.
+                </br>Solution 2 is an attempt to reduce the calculations by validating against the threatening pieces of the opponent and not all his pieces. I've not attempted solution 2 since we only have max 16 pieces that can threaten, and each with a limited amount of moves.
             </p>
 
             <h2>References</h2>
