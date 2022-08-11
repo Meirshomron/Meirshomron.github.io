@@ -84,12 +84,12 @@
                 </br> Every star on the board has its row and its column index.
                 </br>   &emsp;1.	Per column that includes matched tiles:</t>
                 </br>       &emsp;&emsp;a.	Create a list of the rows from the lowest row matched that need to have tiles in them regardless of the matches done.
-                </br>       b.	Iterate from the lowest row of a matched tile till the top tile in the column:
-                </br>           i.	If this tile isn’t a matched tile and it can move:
-                </br>               1.	Move it down to the next row in the list created in (a).
-                </br>       c.	for every tile matched in this column:
-                </br>           i.	Create a new tile
-                </br>           ii.	Move it down to the next row in the list created in (a).
+                </br>       &emsp;&emsp;b.	Iterate from the lowest row of a matched tile till the top tile in the column:
+                </br>           &emsp;&emsp;&emsp;i.	If this tile isn’t a matched tile and it can move:
+                </br>               &emsp;&emsp;&emsp;&emsp;1.	Move it down to the next row in the list created in (a).
+                </br>       &emsp;&emsp;c.	for every tile matched in this column:
+                </br>           &emsp;&emsp;&emsp;i.	Create a new tile
+                </br>           &emsp;&emsp;&emsp;ii.	Move it down to the next row in the list created in (a).
                 </br>
                 </br>
                 </br>
@@ -105,15 +105,15 @@
                 </br>
                 </br> Step (a): Creation of the list [9, 7, 6, 4, 3, 1, 0]
                 </br> Step (b): 
-                </br> 1.	Move the star from row 7 to row 9
-                </br> 2.	Move the star from row 6 to row 7
-                </br> 3.	Move the  star from row 4 to row 6
-                </br> 4.	Move the star from row 3 to row 4
-                </br> 5.	Move the star from row 1 to row 3
-                </br> 6.	Move the star from row 0 to row 1
+                </br> &emsp;1.	Move the star from row 7 to row 9
+                </br> &emsp;2.	Move the star from row 6 to row 7
+                </br> &emsp;3.	Move the  star from row 4 to row 6
+                </br> &emsp;4.	Move the star from row 3 to row 4
+                </br> &emsp;5.	Move the star from row 1 to row 3
+                </br> &emsp;6.	Move the star from row 0 to row 1
                 </br> Step (c): 
-                </br> 1.	Create a new star
-                </br> 2.	Move the new star to row 0
+                </br> &emsp;1.	Create a new star
+                </br> &emsp;2.	Move the new star to row 0
                 </br> Notice that rows 8, 5 and 2 don’t need to have stars in them so they aren’t included in the list created in step (a).
                 </br> In order to have all the columns drop together, we completed the described process for column 5, 6 and 7 together.
                 </br>
