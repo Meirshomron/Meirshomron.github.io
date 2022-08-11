@@ -25,7 +25,7 @@
 
         <!-- Main -->
         <div id="main">
-            <h1 style="text-align:center">Match 3 - Matching Algorithm.html</h1>
+            <h1 style="text-align:center">Match 3 - Matching Algorithm</h1>
             <ul class="actions special">
                 <li><a href="https://github.com/Meirshomron/Match-3" target="_blank" class="button">View Code</a></li>
             </ul>
@@ -36,8 +36,8 @@
                 </br>Lets assume that this is the board shape at the start of the game. 
                 </br>
                 </br><a class="image"><img src="images/match3_step1.png" height="700" alt="" /></a>
-                </br> Lets notice that the shape of our tiles are stars and in the rest of the article I'll be refrencing the stars as the tiles.
-                </br> The shape of the board includes spaces at the start of the game, and these space must be preserved throughout the game. 
+                </br> Lets notice that the shape of our tiles are stars and in the rest of the article I'll be referencing the stars as the tiles.
+                </br> We will be supporting board shapes that are of any shape and just rectangular. 
                 </br>
                 </br>
                 </br>
@@ -63,6 +63,7 @@
                 </br><a class="image"><img src="images/match3_step2.png" height="700" alt="" /></a>
                 </br><b>•</b>	Notice this creates a match of 3 green stars with the other 2 green stars in the row from the bottom (marked with a white X).
                 </br><b>•</b>	Let’s also notice that after the match of theses 3 green stars, 2 more matches of 3 stars are triggered (marked with a pink X).
+                </br>
                 </br><a class="image"><img src="images/match3_step3.png" height="700" alt="" /></a>
                 </br>
                 </br><u>Recap:</u> We flipped the corner green star with the grey star above it. 
@@ -81,8 +82,8 @@
             <p>
                 <u> Let’s dive into the actual logic of dropping down tiles:</u>
                 </br> Every star on the board has its row and its column index.
-                </br>   <t>1.	Per column that includes matched tiles:</t>
-                </br>       a.	Create a list of the rows from the lowest row matched that need to have tiles in them regardless of the matches done.
+                </br>   &emsp;1.	Per column that includes matched tiles:</t>
+                </br>       &emsp;&emsp;a.	Create a list of the rows from the lowest row matched that need to have tiles in them regardless of the matches done.
                 </br>       b.	Iterate from the lowest row of a matched tile till the top tile in the column:
                 </br>           i.	If this tile isn’t a matched tile and it can move:
                 </br>               1.	Move it down to the next row in the list created in (a).
