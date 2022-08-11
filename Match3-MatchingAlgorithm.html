@@ -1,0 +1,180 @@
+﻿<!DOCTYPE HTML>
+<!--
+    Massively by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Meir Shomron</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul class="icons">
+                <li><a href="https://www.facebook.com/meir.shomron" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                <li><a href="https://instagram.com/meirshomron" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="https://github.com/Meirshomron" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+            </ul>
+        </nav>
+
+        <!-- Main -->
+        <div id="main">
+            <h1 style="text-align:center">Making Of Chess</h1>
+            <ul class="actions special">
+                <li><a href="https://github.com/Meirshomron/Chess" target="_blank" class="button">View Code</a></li>
+            </ul>
+            <h2>Intro</h2>
+            <p>
+                Chess is a popular board game. Implementing it in Unity is a great way to continue improving as a game developer.
+                </br>In this article I'll focus on the unique topics related to making a board game, specifically Chess.
+                </br>
+                </br>
+                </br>
+            </p>               
+            
+            <h2>structure</h2>
+            <p>
+                <a class="image"><img src="images/Chess_5.png" height="900" alt="" /></a>
+                 
+                </br>
+                </br>
+                </br>
+            </p>  
+            
+            <h2>Game loop</h2>
+            <p>
+                Board games consist of several players playing together. Each player makes their move when it's their turn.
+                The game ends when a move is made that determines the player the winner.
+                The <i>BoardController</i> is in charge of managing the flow of the game.
+                </br>In more complicated board games, the game is subtracted from different states in a state machine and the controller handles the interactions between the states.
+                </br>Here I had no need for this encapsulation and the The <i>BoardController</i> controls the game flow with the help of the GameModel.
+                </br><a class="image"><img src="images/Chess_9.png" height="900" alt="" /></a>
+                </br>
+                </br>
+                </br>
+            </p>  
+
+
+            <h2>Game Managment</h2>
+            <p>
+                The game consists of many resources and data that need to be managed and interact with each other.
+                </br><a class="image"><img src="images/Chess_10.png" height="200" alt="" /></a>
+
+                </br></br><b>1. Tiles - Game board:</b></br>
+                The tiles can be created dynamically on game start or the game can already have them as part of it.
+                The pros and cons are mainly regarding the time it takes to create them vs the affect of their weight on the size of your app in the store. 
+                Since the board is always loaded and part of our game both options are good but I chose to create them dynamically because createing 64 tiles ahead of time is a lot of work.
+                The <i>TilesMap</i> is in charge of creating all the tiles and managing their data.
+                Every tile holds the player on it - if it's not empty and color manipulation values.
+                
+                </br></br><b>2. Pieces:</b></br>
+                All pieces inherit from an abstract Piece class.
+                </br>The main difference between the pieces in chess is their possible moves, so each sub-class must implement its own SetMoves().
+                </br>There are 3 main ways of connecting the piece to the tile it's on:
+                    </br><b>a. </b>The tile has a pointer to the piece that's on it / The piece has a pointer to the tile it's on. </li>
+                    </br><b>b. </b>We store the tiles in an array in a way that we hold a mapping from a piece's position on the board to the tile it's on.</li>
+                    </br><b>c. </b>Every piece saves the index of the tile it's on.</li>
+                </br>I went for the third option since I didn't want to expose pointers between a piece and a tile.
+                </br>The second option was more complicated than the third option, and I prefer holding up-to-date data than re-calculating it here.
+                </br>Every tile didn't need to know the piece on it, only if a piece was on it and the player on it.
+                </br>Clickability of a piece could have been handled by every piece with <i>OnMouseDown()</i>, and then it could've updated the <i>BoardController</i> with the currently selected piece.
+                </br>I preferred moving all the input handling to the <i>BoardController</i>, but it could've been in an <i>InputHandler</i> class but in this case it was overkill.
+                </br>Every piece has a box collider and all the pieces are in the same layer so the <i>BoardController</i> can ray cast for this layer only on every mouse click. 
+                </br><a class="image"><img src="images/Chess_13.png" height="700" alt="" /></a>
+                
+                </br></br><b>3. Players:</b></br>
+               Two players are required in Chess so I can statically create my 2 players.Note, other board games might enable choosing the number of players at the start.
+                </br>Each player has: ID, name and a pointer to all it's pieces.
+                </br>For simplicity I managed the 2 player's data in the <i>GameModel</i>.
+
+                </br></br><b>4. GameModel:</b></br>
+                In order for the <i>BoardController</i> to control the flow of the game, we need to hold up-to-play data of the game:
+                    </br><b>a. </b>Whose turn it is.</li>
+                    </br><b>b. </b>Is the game over.</li>
+                    </br><b>c. </b>Is a move in progress.</li>
+                    </br><b>d. </b>Is a player in check / checkmate.</li>
+                    </br><b>e. </b>The currently selected piece.</li>
+                </br>The <i>GameModel</i> Handles all this Game data and creates and contains the players data.
+                </br><a class="image"><img src="images/Chess_12.png" height="700" alt="" /></a>
+                
+                </br></br><b>5. Saved Game:</b></br>
+                Saving a game state, includes saving all the piece's data, the current turn and loading it on demand.
+                </br><b>5.1 Saving: </b></br>
+                We can save all this data to a server or to a local file. 
+                </br>I chose to a local file since it's simpler. The better solution would be to a server so that when moving between devices you don't lose your saved game. It's also more secure.
+                </br>I only supported saving the last saved game but in the same way we can save many games.
+                </br><b>5.1 Loading: </b></br>
+                We can only load a saved game from in-game. Since we only saved the pieces data and not the actual pieces, we need to update the data of the current pieces.
+                </br>If a piece was saved but doesn't exist in the current game then we need to create it (from the Promotion Rule). 
+                </br>
+                </br>
+            </p>
+
+            <h2>Simulations</h2>
+            <p>
+                </br><b>Problem: </b> In Chess we need to simulate if a move will put my king in check or if my move can save the king from a current state of check.
+                </br><b>Solution 1: </b> Before we make any moves, simulate my moves and validate them for my king's check status.
+                </br><b>Solution 2: </b> Hold extra data on every piece. If it's potentially threatening to the opposing player's king, then manage all potential and actual threats and validate your moves vs them.
+                </br>
+                </br>Main con for solution 1 is that you need to have the moves of all your players updated on every simulation and every piece needs to be simulated before it moves. This is CPU expensive.
+                </br>Solution 2 is an attempt to reduce the calculations by validating against the threatening pieces of the opponent and not all his pieces. I've not attempted solution 2 since we only have max 16 pieces that can threaten, and each with a limited amount of moves.
+            </p>
+
+            <h2>References</h2>
+            <ul class="actions special">
+                <li><a href="https://www.raywenderlich.com/418-how-to-save-and-load-a-game-in-unity" target="_blank" class="label">Loading & Saving</a></li>
+                </br>
+                </br>
+                </br>
+            </ul>
+
+            <!-- Footer -->
+            <footer>
+                <div class="pagination">
+                    <!--<a href="#" class="previous">Prev</a>-->
+                    <a href="articles.html" class="page">Articles</a>
+                </div>
+            </footer>
+
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <section>
+                <h3>Email</h3>
+                <p>meirshomron@gmail.com</p>
+            </section>
+            <section>
+                <h3>Social</h3>
+                <ul class="icons alt">
+                    <li><a href="https://www.facebook.com/meir.shomron" target="_blank" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+                    <li><a href="https://instagram.com/meirshomron" target="_blank" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="https://github.com/Meirshomron" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+                </ul>
+                <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+                <div class="LI-profile-badge" data-version="v1" data-size="medium" data-locale="en_US" data-type="vertical" data-theme="light" data-vanity="meir-shomron-14580313a"><a class="LI-simple-link" href='https://il.linkedin.com/in/meir-shomron-14580313a?trk=profile-badge'>Meir Shomron</a></div>
+            </section>
+        </footer>
+
+        <!-- Copyright -->
+        <div id="copyright">
+            <ul><li>&copy; MEIRSHOMRON</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+        </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>
