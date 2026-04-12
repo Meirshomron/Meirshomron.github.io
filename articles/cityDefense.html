@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<!--
+	Dopetrope by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Meir Shomron</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<section id="header">
+
+					<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="../index.html">Home</a></li>
+							<li>
+								<a href="#">Practice</a>
+								<ul>
+									<li><a href="../practice/loops.html">Loops</a></li>
+									<li><a href="../practice/functions.html">Functions</a></li>
+									<li><a href="../practice/data-structures.html">Data Structures</a></li>
+									<li>
+										<a href="#">OOP</a>
+										<ul>
+											<li><a href="../practice/oop.html">Encapsulation</a></li>
+											<li><a href="../practice/oop.html">Abstraction</a></li>
+											<li><a href="../practice/oop.html">Inheritance</a></li>
+											<li><a href="../practice/oop.html">Polymorphism</a></li>
+										</ul>
+									</li>
+									<li><a href="../practice/recursion.html">Recursion</a></li>
+								</ul>
+							</li>
+							<li class="current"><a href="../articles.html">Articles</a></li>
+							<li><a href="../projects.html">Projects</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+				</section>
+
+			<!-- Main -->
+				<section id="main">
+					<div class="container">
+
+						<!-- Content -->
+							<article class="box post">
+								<header>
+									<h2>City Defense</h2>
+								</header>
+								<header>
+									<h3>Intro</h3>
+								</header>
+								<p>
+									CityDefense is a hyper-casual game. Its mechanics are easy to understand and use.
+									Waves of attacks threaten your city and your job is to defend it by slashing at the bombs.
+								</p>
+								<section>
+									<header>
+										<h3>structure</h3>
+									</header>
+									<p>
+										<a href="#" class="image featured"><img src="../images/CityDefense1.png" alt="" /></a>
+									</p>
+								</section>
+								<section>
+									<header>
+										<h3>Waves logic</h3>
+									</header>
+									<p>
+										The GameManager manages the WavesManager and the WavesManager manages as is expected - the waves.
+										Every wave has its own level of difficulty that influences both the BombSpawner and the BoostersSpawner.
+										Both these spawners are updated and managed by the WavesManager.
+										The WavesManager also manages the countdown time of the current wave and holds the logic to determine the difficulty of the next wave.
+										<a href="#" class="image featured"><img src="../images/CityDefense2.png" alt="" /></a>
+									</p>
+								</section>
+								<section>
+									<header>
+										<h3>Pooling</h3>
+									</header>
+									<p>
+										In our game we are spawning bombs and boosters every wave, all the time.
+										We improve performance and memory use by reusing objects from a fixed pool instead of allocating and freeing them individually.
+										When the game starts, we insert into our pool several objects per type, and we use and re-use them. You can play the game for hours and still be using only 6 bombs and 6 boosters total!
+										In addition to the standard implementation of pooling, I've added the ability to use an object from the pool for a limited amount of time and to return all the objects of a certain type at once.
+
+										This image shows the pool at the start of the game in the game hierarchy:
+										<a href="#" class="image featured"><img src="../images/CityDefense3.png" alt="" /></a>
+									</p>
+								</section>
+								<section>
+									<header>
+										<h3>Popups</h3>
+									</header>
+									<p>
+										I've implemented a basic PopupsManager that holds a reference to a Popups Canvas. It contains the common background of a popup and all the popups are disabled.
+										Popups can show from anywhere in the game by the PopupsManager - enable it or if another popup is currently showing, added to a queue.
+										When showing a popup, we can tell the PopupsManager if it has an auto-closing timeout.
+										Once a popup is closed - if by actively closing it or by the auto-close, the PopupsManager checks whether to disable the popup's common background or show the next popup.
+										Since the game doesn't have many popups, and they don't need to be changed dynamically, we can afford to hold them all under the Popups Canvas.
+										In more complicated games we'd also be loading/unloading the popups and managing the preloader in between.
+									</p>
+								</section>
+								<section>
+									<header>
+										<h3>Events and decoupling</h3>
+									</header>
+									<p>
+										Creating code that is scalable and clear to understand, where every area of code is responsible only for itself and doesn't control others is a hard task. It demands planning the code structure ahead of time and not just "making it work" on the fly.
+										To follow this basic code philosophy I've used an EventManager to pass events and data between areas of code.
+										Anyone who cares for a certain event will listen to it and handle it according to a predefined protocol structure of the event's data.
+
+										For example:
+										Blade hits a bomb -> Triggers a hit event -> Bomb handles the event and creates a sliced animation. -> Triggers an award event -> GameManager updates the user's score.
+									</p>
+								</section>
+							</article>
+						<section>
+							<ul class="actions">
+								<li><a href="../articles.html" class="button alt">Back</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+		</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.dropotron.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

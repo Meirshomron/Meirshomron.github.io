@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<!--
+	Dopetrope by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+	<title>Meir Shomron</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+<body class="no-sidebar is-preload">
+<div id="page-wrapper">
+
+	<!-- Header -->
+	<section id="header">
+
+		<!-- Nav -->
+		<nav id="nav">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li>
+					<a href="#">Practice</a>
+					<ul>
+						<li><a href="../practice/loops.html">Loops</a></li>
+						<li><a href="../practice/functions.html">Functions</a></li>
+						<li><a href="../practice/data-structures.html">Data Structures</a></li>
+						<li>
+							<a href="#">OOP</a>
+							<ul>
+								<li><a href="../practice/oop.html">Encapsulation</a></li>
+								<li><a href="../practice/oop.html">Abstraction</a></li>
+								<li><a href="../practice/oop.html">Inheritance</a></li>
+								<li><a href="../practice/oop.html">Polymorphism</a></li>
+							</ul>
+						</li>
+						<li><a href="../practice/recursion.html">Recursion</a></li>
+					</ul>
+				</li>
+				<li class="current"><a href="../articles.html">Articles</a></li>
+				<li><a href="../projects.html">Projects</a></li>
+				<li><a href="../about.html">About</a></li>
+			</ul>
+		</nav>
+	</section>
+
+	<!-- Main -->
+	<section id="main">
+		<div class="container">
+
+			<!-- Content -->
+			<article class="box post">
+				<header>
+					<h2>Chess</h2>
+				</header>
+				<header>
+					<h3>Intro</h3>
+				</header>
+				<p>
+					Chess is a popular board game. Implementing it in Unity is a great way to continue improving as a game developer.
+					In this article I'll focus on the unique topics related to making a board game, specifically Chess.
+				</p>
+				<section>
+					<header>
+						<h3>structure</h3>
+					</header>
+					<p>
+						<a href="#" class="image featured"><img src="../images/Chess1.png" alt="" /></a>
+					</p>
+				</section>
+				<section>
+					<header>
+						<h3>Game loop</h3>
+					</header>
+					<p>
+						Board games consist of several players playing together. Each player makes their move when it's their turn. The game ends when a move is made that determines the player the winner. The BoardController is in charge of managing the flow of the game.
+						In more complicated board games, the game is subtracted from different states in a state machine and the controller handles the interactions between the states.
+						Here I had no need for this encapsulation and the The BoardController controls the game flow with the help of the GameModel.
+						<a href="#" class="image featured"><img src="../images/Chess2.png" alt="" /></a>
+					</p>
+				</section>
+				<section>
+					<header>
+						<h3>Game Management</h3>
+					</header>
+					<p>
+						The game consists of many resources and data that need to be managed and interact with each other.
+
+						<a href="#" class="image featured"><img src="../images/Chess3.png" alt="" /></a>
+
+						1. Tiles - Game board:
+						The tiles can be created dynamically on game start or the game can already have them as part of it. The pros and cons are mainly regarding the time it takes to create them vs the affect of their weight on the size of your app in the store. Since the board is always loaded and part of our game both options are good but I chose to create them dynamically because createing 64 tiles ahead of time is a lot of work. The TilesMap is in charge of creating all the tiles and managing their data. Every tile holds the player on it - if it's not empty and color manipulation values.
+						<br /><br />
+						2. Pieces:
+						All pieces inherit from an abstract Piece class.
+						The main difference between the pieces in chess is their possible moves, so each sub-class must implement its own SetMoves().
+						<br />There are 3 main ways of connecting the piece to the tile it's on:
+						<br />a. The tile has a pointer to the piece that's on it / The piece has a pointer to the tile it's on.
+						<br />b. We store the tiles in an array in a way that we hold a mapping from a piece's position on the board to the tile it's on.
+						<br />c. Every piece saves the index of the tile it's on.
+						I went for the third option since I didn't want to expose pointers between a piece and a tile.
+						The second option was more complicated than the third option, and I prefer holding up-to-date data than re-calculating it here.
+						Every tile didn't need to know the piece on it, only if a piece was on it and the player on it.
+						Clickability of a piece could have been handled by every piece with OnMouseDown(), and then it could've updated the BoardController with the currently selected piece.
+						I preferred moving all the input handling to the BoardController, but it could've been in an InputHandler class but in this case it was overkill.
+						Every piece has a box collider and all the pieces are in the same layer so the BoardController can ray cast for this layer only on every mouse click.
+
+						<a href="#" class="image featured"><img src="../images/Chess4.png" alt="" /></a>
+
+						3. Players:
+						Two players are required in Chess so I can statically create my 2 players.Note, other board games might enable choosing the number of players at the start.
+						Each player has: ID, name and a pointer to all it's pieces.
+						For simplicity, I managed the 2 player's data in the GameModel.
+						<br /><br />
+						4. GameModel:
+						In order for the BoardController to control the flow of the game, we need to hold up-to-play data of the game:
+						a. Whose turn it is.
+						b. Is the game over.
+						c. Is a move in progress.
+						d. Is a player in check / checkmate.
+						e. The currently selected piece.
+						The GameModel Handles all this Game data and creates and contains the players' data.
+
+						<a href="#" class="image featured"><img src="../images/Chess5.png" alt="" /></a>
+
+						5. Saved Game:
+						Saving a game state, includes saving all the piece's data, the current turn and loading it on demand.
+						<br />5.1 Saving:
+						We can save all this data to a server or to a local file.
+						I chose to a local file since it's simpler. The better solution would be to a server so that when moving between devices you don't lose your saved game. It's also more secure.
+						I only supported saving the last saved game but in the same way we can save many games.
+						<br />5.1 Loading:
+						We can only load a saved game from in-game. Since we only saved the pieces data and not the actual pieces, we need to update the data of the current pieces.
+						If a piece was saved but doesn't exist in the current game then we need to create it (from the Promotion Rule).
+
+					</p>
+				</section>
+				<section>
+					<header>
+						<h3>Simulations</h3>
+					</header>
+					<p>
+						Problem: In Chess we need to simulate if a move will put my king in check or if my move can save the king from a current state of check.
+						<br />Solution 1: Before we make any moves, simulate my moves and validate them for my king's check status.
+						<br />Solution 2: Hold extra data on every piece. If it's potentially threatening to the opposing player's king, then manage all potential and actual threats and validate your moves vs them.
+
+						<br /><br />Main con for solution 1 is that you need to have the moves of all your players updated on every simulation and every piece needs to be simulated before it moves. This is CPU expensive.
+						Solution 2 is an attempt to reduce the calculations by validating against the threatening pieces of the opponent and not all his pieces. I've not attempted solution 2 since we only have max 16 pieces that can threaten, and each with a limited amount of moves.
+					</p>
+				</section>
+				<section>
+					<header>
+						<h3>References</h3>
+					</header>
+					<p>
+					<ul class="actions">
+					<li><a href="https://www.kodeco.com/418-how-to-save-and-load-a-game-in-unity" target="_blank" >Loading & Saving</a></li>
+					</ul>
+					</p>
+				</section>
+			</article>
+			<section>
+				<ul class="actions">
+					<li><a href="../articles.html" class="button alt">Back</a></li>
+				</ul>
+			</section>
+		</div>
+	</section>
+</div>
+
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/jquery.dropotron.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>
