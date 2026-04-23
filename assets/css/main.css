@@ -60,6 +60,27 @@ mark {
 	color: inherit;
 }
 
+pre {
+	background-color: #f4f4f4; /* Light grey background */
+	border: 1px solid #ddd;    /* Subtle border */
+	border-left: 3px solid #f36d33; /* Accent line on the left */
+	color: #333;               /* Dark text color */
+	page-break-inside: avoid;
+	font-family: monospace;    /* Traditional code font */
+	font-size: 15px;
+	line-height: 1.6;
+	margin-bottom: 1.6em;
+	max-width: 100%;
+	overflow: auto;            /* Adds scrollbar if code is too long */
+	padding: 1em 1.5em;
+	display: block;
+	word-wrap: break-word;
+}
+
+code {
+	font-family: "Courier New", Courier, monospace;
+}
+
 input::-moz-focus-inner {
 	border: 0;
 	padding: 0;
@@ -1582,6 +1603,15 @@ input, select, textarea {
 			margin-top: auto; /* This is the "magic" line that pushes the button to the bottom */
 		}
 
+/* This forces all paragraph text in your posts to be normal (not slanted) */
+.box.post p {
+	font-style: normal !important;
+}
+
+/* If the text inside the summary is also slanted, add this: */
+summary {
+	font-style: normal !important;
+}
 /*
 .box .image.featured {
     position: relative;

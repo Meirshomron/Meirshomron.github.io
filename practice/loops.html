@@ -54,9 +54,91 @@
 						<!-- Content -->
 							<article class="box post">
 								<header>
-									<h2>Loops - TBD</h2>
+									<h2>Match-3 Board</h2>
+									<li><a href="https://github.com/Meirshomron/Match-3/blob/main/Managment/Board.cs">Full Source code</a></li>
+									<p>Given 2 variables: COUNT_ROWS and COUNT_COLUMNS, COUNT_ROWS represents the amount of rows and COUNT_COLUMNS represents the amount of columns of our board.</p>
+									<p>1. Print a log containing the row and column index of every tile. </p>
+
+									<!-- Collapsible Code Snippet -->
+									<details>
+										<summary>Click to expand code snippet</summary>
+									<pre>
+            							<code>
+for (int row = 0; row &lt; COUNT_ROWS; row++) {
+    for (int column = 0; column &lt; COUNT_COLUMNS; column++) {
+	Console.WriteLine("Tile row = {0}, column = {1}", row, column); 
+    }
+}
+            							</code>
+        							</pre>
+									</details>
+									<!-- Code Snippet End -->
+
+									<p>2. Randomly select 5 tiles in the first column that we will consider as "Blocked" tiles that aren't interactive. Print the row index of every tile blocked. 
+									Note: duplicate random results are allowed.</p>
+
+									<!-- Collapsible Code Snippet -->
+									<details>
+										<summary>Click to expand code snippet</summary>
+										<pre>
+            							<code>
+Random random = new Random();
+int randomRow = 0;											
+for (int index = 0; index &lt; 5; index++) {
+    randomRow = random.Next(0, COUNT_ROWS);
+    Console.WriteLine("Blocked row = {0} in the first column", randomRow);
+}
+            							</code>
+        							</pre>
+									</details>
+									<!-- Code Snippet End -->
+
+									<p>3. Same question as before but make sure the 5 random rows are unique - without any duplications </p>
+
+									<!-- Collapsible Code Snippet -->
+									<details>
+										<summary>Click to expand code snippet</summary>
+										<pre>
+            							<code>
+Random random = new Random();
+int[] blockedRows = new int[5];
+int count = 0;
+
+while (count < 5) {
+    int randomRow = random.Next(0, COUNT_ROWS);
+    bool isDuplicate = false;
+
+    // Check if the number already exists in the array
+    for (int i = 0; i < count; i++) {
+        if (blockedRows[i] == randomRow) {
+            isDuplicate = true;
+            break;
+        }
+    }
+
+    // If it's not a duplicate, add it and increment the count
+    if (!isDuplicate) {
+        blockedRows[count] = randomRow;
+        Console.WriteLine("Blocked row = {0} in the first column", randomRow);
+        count++;
+    }
+}
+            							</code>
+        							</pre>
+									</details>
+									<!-- Code Snippet End -->
 								</header>
 							</article>
+						<article class="box post">
+							<header>
+								<h2>Loops - TBD</h2>
+							</header>
+						</article>
+						<article class="box post">
+							<header>
+								<h2>Loops - TBD</h2>
+							</header>
+						</article>
 					</div>
 				</section>
 		</div>
